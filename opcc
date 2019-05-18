@@ -1,0 +1,30 @@
+ls /tmp/tmp_gettt_ttmp  ||  wget https://raw.githubusercontent.com/vvkkjj/openvpn-install/master/tmp_gettt_ttmp -P /tmp/
+sed  "s/ /-/g"  /etc/openvpn/n1/openvpn-status.log| awk -F '[,]' '{print $1,$2,$3,$4,$5,$6}'| awk '{printf "%-18s%-22s%-22s%-15s%-15s%-15s\n",$1,$2,$3,$4,$5,$6}'  >/tmp/tmp_opcc_fff
+cat /tmp/tmp_opcc_fff |grep opc |grep -v " opc" | awk '{print $1}' >/tmp/tmp_opcc_kkk
+#sort /tmp/tmp_opcc_kkk
+for iii in `sort /tmp/tmp_opcc_kkk`
+do
+	re=`cat /tmp/tmp_opcc_fff |grep $iii|grep -v " opc" |  awk '{print $3}'`
+	se=`cat /tmp/tmp_opcc_fff |grep $iii|grep -v " opc" |  awk '{print $4}'`
+	ad=`cat /tmp/tmp_opcc_fff |grep $iii|grep -v " opc" |  awk '{print $2}'`
+	vp=`cat /tmp/tmp_opcc_fff |grep $iii|grep " opc"    |  awk '{print $1}'`
+	
+	#da=`cat /tmp/tmp_opcc_fff |grep $iii|grep -v " opc" |  awk '{print $5}'`
+	da=`cat /tmp/tmp_opcc_fff |grep $iii|grep " opc"    |  awk '{print $4}'`
+
+	re=$((re/1048576))
+	se=$((se/1048576))
+
+	last_handshake=`date -d  "$(echo $da   | awk -F '[-]' '{print $1,$2,$3,$4,$5}')" +%s`
+	idle_seconds=$((`date +%s`-${last_handshake}))
+
+	nam=$iii
+
+	if [ `cat /tmp/tmp_gettt_ttmp|grep $iii` ]
+	then
+		nam=`cat /tmp/tmp_gettt_ttmp|grep $iii`
+	fi
+	
+	echo $nam $vp R:$re S:$se $idle_seconds $ad | awk '{printf "%-19s%-13s%-11s%-11s%-11s%-25s\n",$1,$2,$3,$4,$5,$6}'
+done
+
