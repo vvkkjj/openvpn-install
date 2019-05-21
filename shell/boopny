@@ -1,0 +1,25 @@
+pip=10.2.27.1
+deley=209
+echo 333333
+sleep 1
+
+sh /root/opaliny
+nn=1
+for oo in 1 2 3 4 5 6 7 8 9 10
+do
+	rr=$(($oo+$deley))
+	echo $rr  ------
+	[ $nn -ge 9 ] && break
+	ping $pip -c 2
+	aavg=`ping $pip -c 5 |grep min/avg/max | awk -F '[./]' '{print $5}'`
+	
+	if [ $aavg -le $deley ]
+	then
+		echo  $aavg less then $deley 
+		
+		break
+	fi
+	
+	echo  $aavg is bigger then $deley 
+	sh /root/opaliny
+done
