@@ -1,0 +1,19 @@
+zhuti=$1
+neirong=$2
+mailbox=xxxxx
+mailpass=xxxx
+mssmtp=smtp.163.com
+tomail=xxxxxxx
+#/usr/local/bin/sendEmail -f $mailbox -t $tomail -s $mssmtp -u "$zhuti" -o message-content-type=html -o message-charset=utf8 -xu $mailbox -xp $mailpass -m "$neirong"
+
+
+/usr/local/bin/sendEmail -f $mailbox -t $tomail -s $mssmtp -u "$zhuti" -xu $mailbox -xp $mailpass -m "$neirong"
+
+
+exit 0
+wget http://caspian.dotconf.net/menu/Software/SendEmail/sendEmail-v1.56.tar.gz
+wget https://github.com/vvkkjj/Linux-NetSpeed/raw/master/minivtun/sendEmail-v1.56.tar.gz
+tar zxf sendEmail-v1.56.tar.gz -C /tmp
+cp /tmp/sendEmail-v1.56/sendEmail  /usr/bin/sendEmail
+chmod +x /usr/bin/sendEmail
+
